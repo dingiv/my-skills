@@ -256,7 +256,7 @@ class UserController {
 - ❌ 想用 IOC 但只有 1 个实现 → 等真的有第二个再加
 - ❌ 没用框架支持 IOC 的语言，强行自己造 → 通常不划算
 
-## OCP 与 code_arch 其他章节
+## OCP 与 code-master 其他章节
 
 | 章节 | 与 OCP 的关系 |
 | --- | --- |
@@ -267,9 +267,9 @@ class UserController {
 | [rust-style 进程层 R1-R7](../../../../rust-style/SKILL.md) | Rust 实现 OCP 的具体规则 |
 | [ts-style 规则 7-9](../../../../ts-style/SKILL.md) | TypeScript 实现 OCP 的具体规则 |
 
-## SOLID 在 code_arch / language style 中的落地
+## SOLID 在 code-master / language style 中的落地
 
-| 原则 | code_arch 章节 | 语言 style 落地 |
+| 原则 | code-master 章节 | 语言 style 落地 |
 | --- | --- | --- |
 | S 单一职责 | [workflow.md 2.4 步](../operations/workflow.md) | rust-style R2 / ts-style 规则 1-2 |
 | O 开闭 | **本章** | rust-style R1-R2 / ts-style 规则 7-9 |

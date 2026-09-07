@@ -142,7 +142,7 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 - MVVM：响应式前端，View 高频变动
 - ECS：游戏 / 渲染，需要批处理高吞吐
 
-## 跟 code_arch 其他章节的对应
+## 跟 code-master 其他章节的对应
 
 | 本章 | 对应 |
 | --- | --- |
@@ -152,7 +152,7 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 | [三种应用模式](../operations/modes.md) | 三种典型搭建场景 |
 | [Bootstrap 流程](../operations/phases/initiation.md) | 0 → 1 的对话引导 |
 
-读 code_arch 的顺序：**核心论断 → 本章 → 工作流**。先知道状态机是什么、再知道状态机长什么样、再知道怎么搭一台。
+读 code-master 的顺序：**核心论断 → 本章 → 工作流**。先知道状态机是什么、再知道状态机长什么样、再知道怎么搭一台。
 
 ## 自检：你的程序是这个形态吗？
 

@@ -235,7 +235,7 @@ f.close();                  // drop
 
 唯一的 owner 负责 4 钩子的调用时机，其他模块只能 get / set，不能 init / destroy。
 
-## 跟 code_arch 的对应
+## 跟 code-master 的对应
 
 | 本章 | 对应 |
 | --- | --- |
@@ -245,7 +245,7 @@ f.close();                  // drop
 | [复杂度封装效应](encapsulation.md) | 封装 = 用作用域隔离复杂度 |
 | [工作流：四步](../operations/workflow.md) 第 2.4 步 | 空间复杂度优化 = 按作用域拆分 |
 
-读 code_arch 的顺序：**核心论断 → anatomy → 本章 → 工作流 2.4**。
+读 code-master 的顺序：**核心论断 → anatomy → 本章 → 工作流 2.4**。
 
 ## 自检
 
