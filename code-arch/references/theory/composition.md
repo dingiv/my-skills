@@ -116,7 +116,7 @@ A 依赖 B → B 的生命周期必须前向包含 A 使用 B 的时间窗
 - [ ] 每加一个约束，搜索空间都明显缩小？
 - [ ] 依赖约束：使用前准备（变量赋值 / 资源 open / state init）？
 
-任何一项不满足，去查 [典型反模式](anti-patterns.md) 和 [自查清单](self-check.md)。
+任何一项不满足，去查 [典型反模式](../operations/anti-patterns.md) 和 [自查清单](../operations/self-check.md)。
 
 ## 一句话
 

@@ -148,9 +148,9 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 | --- | --- |
 | [核心论断](core.md) | 状态机的抽象模型 |
 | **本章**（anatomy） | 状态机的代码形态 |
-| [工作流：四步](workflow.md) | 怎么搭一台状态机 |
-| [三种应用模式](modes.md) | 三种典型搭建场景 |
-| [Bootstrap 流程](bootstrap.md) | 0 → 1 的对话引导 |
+| [工作流：四步](../operations/workflow.md) | 怎么搭一台状态机 |
+| [三种应用模式](../operations/modes.md) | 三种典型搭建场景 |
+| [Bootstrap 流程](../operations/phases/initiation.md) | 0 → 1 的对话引导 |
 
 读 code_arch 的顺序：**核心论断 → 本章 → 工作流**。先知道状态机是什么、再知道状态机长什么样、再知道怎么搭一台。
 
@@ -164,7 +164,7 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 - [ ] cleanup 是逆序的？
 - [ ] 三层结构是单向依赖（View → Service → Model）？
 
-任何一项不满足，程序就有架构问题——具体是哪类问题，去查 [典型反模式](anti-patterns.md) 和 [自查清单](self-check.md)。
+任何一项不满足，程序就有架构问题——具体是哪类问题，去查 [典型反模式](../operations/anti-patterns.md) 和 [自查清单](../operations/self-check.md)。
 
 ## 一句话
 
