@@ -367,7 +367,7 @@ function dirtyProcessUser(user: User): void {
 
 **详见前两节**：
 
-- **改参函数**的可原谅条件 → 见 [### 1. 改参函数 - 改参函数的可原谅条件](#1-改参函数parameter-mutating)（状态所有者调用 + 4 条判据）
+- **改参函数**的纠正 → 见 [### 1. 改参函数](#1-改参函数parameter-mutating)（不可变更新 / 返回新值；可原谅条件见下方「脏函数的可原谅性」）
 - **IO 函数**的使用纪律 → 见 [### 2. IO 函数 - IO 函数的使用纪律](#2-io-函数io-function)（4 条铁律：Connection 封装 / failable / 内部状态 / 单一 owner）
 
 三种可原谅的脏（从上面两条细化出来）：
@@ -419,8 +419,8 @@ handler onClick(event, state):
 | [anatomy.md](anatomy.md) | daemon 八件套中的 handler = 纯函数 + 脏函数的封装 |
 | [derivation.md 第 4 步](../operations/derivation.md) | 事件 → handler 时，handler 内的函数按本章分类 |
 | [phases/early-dev.md](../operations/phases/early-dev.md) | 工具模块（logger / config）= 典型脏函数封装 |
-| [rust-style 进程层 R1](../../../../rust-style/SKILL.md) | Rust 语言的脏函数分类（与本章同构）|
-| [ts-style 规则 11](../../../../ts-style/SKILL.md) | TypeScript 语言的脏函数分类（与本章同构）|
+| [rust-style 代码层 R1](../../../rust-style/SKILL.md) | Rust 语言的脏函数分类（与本章同构）|
+| [ts-style 规则 11](../../../ts-style/SKILL.md) | TypeScript 语言的脏函数分类（与本章同构）|
 
 ## 反模式
 

@@ -6,15 +6,15 @@
 
 ## 一句话
 
-> **4 类约束标记：全局架构文档（`docs/arch/`）→ 模块设计说明（`<module>/arch.md`）→ 文件头注释 → 行间 TODO/FIXME。** 颗粒度从粗到细，覆盖从项目级到代码行级。
+> **4 类约束标记：全局架构文档（`docs/arch/`）→ 模块设计说明（`<module>/arch.md`）→ 文件头注释 → 行间 `// CMA:`（Code Master Annotation）。** 颗粒度从粗到细，覆盖从项目级到代码行级。
 
 ## 何时使用
 
 - 项目创建时——初始化 `docs/arch/` 目录
 - 每个新模块创建时——加 `arch.md` 和文件头注释
 - 任何代码改动前——查阅对应模块的 `arch.md` 和文件头
-- Code review 时——用 `TODO: [code-master]` / `FIXME: [code-master]` 标记违规
-- 修复违规时——用 git commit 引用约束标记（如 `fix: resolve code-master TODO in logger.ts`）
+- Code review 时——用 `// CMA:` 标记违规
+- 修复违规时——用 git commit 引用约束标记（如 `fix: resolve CMA in logger.ts`）
 
 ## 4 类约束标记
 
@@ -26,9 +26,9 @@
 
 | 文件 | 用途 | 来源 |
 | --- | --- | --- |
-| `REQUIREMENTS.md` | 需求文档 | [phases/initiation.md](../phases/initiation.md) 第 2 步 |
-| `interfaces.md` | 端到端接口列表 | [phases/initiation.md](../phases/initiation.md) 第 3 步 |
-| `calltrees/` | 端到端调用链图 | [phases/initiation.md](../phases/initiation.md) 第 4 步 |
+| `REQUIREMENTS.md` | 需求文档 | [phases/initiation.md](phases/initiation.md) 第 2 步 |
+| `interfaces.md` | 端到端接口列表 | [phases/initiation.md](phases/initiation.md) 第 3 步 |
+| `calltrees/` | 端到端调用链图 | [phases/initiation.md](phases/initiation.md) 第 4 步 |
 | `implementation.md` | 实施方案（哪些模块、什么顺序、什么边界） | 实施时持续更新 |
 | `decisions/` (ADR) | 架构决策记录（"为什么这么选") | 重大决策时增加 |
 | `phases.md` | 当前项目处于哪个阶段 | [modes.md](modes.md) 三种模式 |
@@ -53,7 +53,7 @@ project-root/
 
 **何时更新**：
 
-- 立项时期——[phases/initiation.md](../phases/initiation.md) 走完后，docs/arch/ 目录必须存在
+- 立项时期——[phases/initiation.md](phases/initiation.md) 走完后，docs/arch/ 目录必须存在
 - 重大架构变更——修改 docs/arch/ 对应章节
 - 每完成一个里程碑——更新 implementation.md 进度
 - 重大决策——新增一份 ADR
@@ -143,7 +143,7 @@ project-root/
  * - 点击触发 `onUserClick(userId)` 回调
  * - 不持有内部状态（完全受控）
  *
- * 约束（违反需标 TODO: [code-master]）：
+ * 约束（违反需标 // CMA:）：
  * - 不能在 useEffect 里 setState（无状态组件）
  * - 必须配合 UserContext 使用获取当前用户
  * - 列表项 key 必须用 user.id，禁止用 index
@@ -174,7 +174,7 @@ export function UserList({ users, onUserClick }: UserListProps) {
 // - 所有方法返回 Result<T, RepoError>
 // - 不在内部启动事务（事务由调用方管理）
 //
-// 约束（违反需标 TODO: [code-master]）：
+// 约束（违反需标 // CMA:）：
 // - 不能直接打开连接（必须通过 DbConnection::query）
 // - 不能 panic（任何错误用 ? 传播）
 // - 不持有可变状态
@@ -194,7 +194,7 @@ impl<'a> UserRepo<'a> {
 **结构**（推荐 5 段）：
 
 1. **设计要点**——这个文件做什么、核心思路
-2. **约束**——违反需要标 `TODO: [code-master]` 的规则
+2. **约束**——违反需要标 `// CMA:` 的规则
 3. **接口/类型**——文件导出的主要内容（可省略——TS 有类型签名）
 4. **相关**——指向 docs/arch/ 或其他 arch.md 的引用
 5. **变更历史**（可选）——大改动时记一行
@@ -211,7 +211,9 @@ impl<'a> UserRepo<'a> {
 - 头注释跟代码脱节（不更新）→ 误导读者
 - 头注释解释明显代码（`i++; // 加 1`）→ 删
 
-### 4. 行间标记（`TODO: [code-master]` / `FIXME: [code-master]`）
+### 4. 行间标记（`// CMA:` / `# CMA:`）
+
+> **CMA** = **C**ode **M**aster **A**nnotation——code-master 架构标记。原来 `TODO: [code-master]` / `FIXME: [code-master]` / `HACK: [code-master]` 三种全部统一为 `// CMA:` 前缀（Python 用 `# CMA:`）。
 
 **位置**：代码任意位置（行尾或行首）。
 
@@ -219,22 +221,22 @@ impl<'a> UserRepo<'a> {
 
 ```typescript
 // TypeScript / JavaScript
-// TODO: [code-master] 这里改参函数违反 clean-code，应该返回新值
-// FIXME: [code-master] 状态机里缺少 idle 状态
-// HACK: [code-master] 临时方案，需要重构（[issue #123]）
+// CMA: 这里改参函数违反 clean-code，应该返回新值
+// CMA: 状态机里缺少 idle 状态
+// CMA: 临时方案，需要重构（issue #123）
 ```
 
 ```rust
 // Rust
-// TODO: [code-master] 这里改参函数违反 clean-code，应该返回新值
-// FIXME: [code-master] 状态机里缺少 idle 状态
-// HACK: [code-master] 临时方案，需要重构（issue #123）
+// CMA: 这里改参函数违反 clean-code，应该返回新值
+// CMA: 状态机里缺少 idle 状态
+// CMA: 临时方案，需要重构（issue #123）
 ```
 
 ```python
 # Python
-# TODO: [code-master] 这里改参函数违反 clean-code，应该返回新值
-# FIXME: [code-master] 状态机里缺少 idle 状态
+# CMA: 这里改参函数违反 clean-code，应该返回新值
+# CMA: 状态机里缺少 idle 状态
 ```
 
 **触发**：
@@ -247,27 +249,26 @@ impl<'a> UserRepo<'a> {
 
 ```
 发现违规
-  → TODO: [code-master] 标记
+  → // CMA: 标记
   → 创建 issue（可选）
   → 开发者认领
   → 修改代码
-  → 移除 TODO: [code-master]
-  → commit message: fix: resolve code-master TODO in <file>
+  → 移除 // CMA:
+  → commit message: fix: resolve CMA in <file>
 ```
 
-**语法**：
+**语法**：所有行间标记统一为 `// CMA:` 前缀（Python 用 `# CMA:`），原来 `TODO/FIXME/HACK: [code-master]` 都合并——严重度由所在层（arch.md / docs/arch/）描述，不再靠注释前缀区分。
 
-| 标记 | 严重度 | 何时用 |
-| --- | --- | --- |
-| `TODO: [code-master]` | 中 | 应该做但现在不做（要记录原因） |
-| `FIXME: [code-master]` | 高 | 明显错误，必须修（要写 issue） |
-| `HACK: [code-master]` | 严重 | 临时方案，必须重构（issue + deadline）|
+| 写法 | 说明 |
+| --- | --- |
+| `// CMA: foo` | TypeScript / JavaScript / Rust（C 行注释） |
+| `# CMA: foo` | Python（井号注释） |
 
 **反模式**：
 
-- 大量 `TODO: [code-master]` 长期遗留 → 成了"标记但不管"
-- 不带 `[code-master]` 前缀的 TODO → 跟普通 TODO 混了
-- 没有 issue 关联的 FIXME → 永远修不掉
+- 大量 `// CMA:` 标记长期遗留 → 成了"标记但不管"
+- 普通 TODO 没改用 `// CMA:` 前缀 → 跟架构标记混了
+- 标记后不关联 issue → 永远修不掉
 
 ## 4 类标记的协作
 
@@ -287,7 +288,7 @@ src/views/Layout.tsx              ← 文件级
    code-master:title 块           ← 这个文件的设计
 
 src/utils/logger.ts:42            ← 代码行级
-   // TODO: [code-master]           ← 这一行/段的约束违规
+   // CMA:           ← 这一行/段的约束违规
 ```
 
 **自上而下**：
@@ -299,7 +300,7 @@ src/utils/logger.ts:42            ← 代码行级
 
 **自下而上**：
 
-- 行间 `TODO` 累积到一定数量 → 提升到 `arch.md`（"已知问题"）
+- 行间 `// CMA:` 累积到一定数量 → 提升到 `arch.md`（"已知问题"）
 - `arch.md` 跟实际不符 → 提升到 `docs/arch/decisions/`
 - `docs/arch/` 改动 → 触发各层 `arch.md` 同步更新
 
@@ -308,12 +309,12 @@ src/utils/logger.ts:42            ← 代码行级
 | 章节 | 关系 |
 | --- | --- |
 | [SKILL.md 核心方法论](../../SKILL.md#核心方法论约束驱动扩散) | "约束驱动扩散" = 显化后才能扩散；标记是显化的载体 |
-| [phases/initiation.md](../phases/initiation.md) | 第 2-4 步的产物 = `docs/arch/REQUIREMENTS.md` / `interfaces.md` / `calltrees/` |
-| [phases/early-dev.md](../phases/early-dev.md) | 项目骨架建好时建 `docs/arch/` 目录；建第一个模块的 `arch.md` |
+| [phases/initiation.md](phases/initiation.md) | 第 2-4 步的产物 = `docs/arch/REQUIREMENTS.md` / `interfaces.md` / `calltrees/` |
+| [phases/early-dev.md](phases/early-dev.md) | 项目骨架建好时建 `docs/arch/` 目录；建第一个模块的 `arch.md` |
 | [interface-contract.md](interface-contract.md) | 接口契约的具体形式（与 `docs/arch/interfaces.md` 配合使用） |
-| [engineering.md](engineering.md) | 工程化（CI / Git）可以 grep `[code-master]` 标记生成 review 检查项 |
-| [function-purity.md](../../theory/function-purity.md) | 行间标记常用于标记"违反纯函数 / 脏函数纪律"的代码 |
-| [solid.md](../../theory/solid.md) | 行间标记常用于标记"违反 SOLID / OCP"的代码 |
+| [engineering.md](engineering.md) | 工程化（CI / Git）可以 grep `// CMA:` 标记生成 review 检查项 |
+| [function-purity.md](../theory/function-purity.md) | 行间标记常用于标记"违反纯函数 / 脏函数纪律"的代码 |
+| [solid.md](../theory/solid.md) | 行间标记常用于标记"违反 SOLID / OCP"的代码 |
 
 ## 反模式
 
@@ -323,8 +324,8 @@ src/utils/logger.ts:42            ← 代码行级
 | **arch.md 写太多** | arch.md 100+ 行变 README | arch.md 只写设计意图，细节放代码注释 |
 | **arch.md 从不更新** | 立项时写一次后没人改 | 任何架构改动 = 改代码 + 改 arch.md（一次 PR）|
 | **文件头注释过时** | 改代码没改头 | 改代码时同步检查头注释 |
-| **TODO 不带前缀** | 跟普通 TODO 混在一起 | 所有架构相关的 TODO 必须带 `[code-master]` |
-| **FIXME 长期遗留** | FIXME 标记后没人修 | FIXME 必须有 issue + deadline |
+| **TODO 不带 CMA 前缀** | 跟普通 TODO 混在一起 | 所有架构相关的 TODO 必须带 `// CMA:` |
+| **CMA 长期遗留** | `// CMA:` 标记后没人修 | CMA 必须有 issue + deadline |
 | **arch.md 只列文件清单** | `arch.md` 就是 `ls` 的结果 | arch.md 是设计意图，不是文件清单 |
 
 ## 自检
@@ -349,10 +350,10 @@ src/utils/logger.ts:42            ← 代码行级
 
 ### 行间标记
 
-- [ ] 发现的违规都用 `TODO/FIXME/HACK: [code-master]` 标记？
-- [ ] FIXME/HACK 都关联了 issue？
+- [ ] 发现的违规都用 `// CMA:` 标记？
+- [ ] 每个 `// CMA:` 都关联了 issue？
 - [ ] 长期遗留的标记数 ≤ N（具体阈值团队定）？
 
 ## 一句话
 
-> **约束标记显化 = 让约束可见、可追溯、可检视。** 4 类标记（`docs/arch/` / `<module>/arch.md` / 文件头 `code-master:title` / 行间 `TODO: [code-master]`）覆盖从项目级到代码行级——没有标记，约束就只在脑子里，没法扩散。
+> **约束标记显化 = 让约束可见、可追溯、可检视。** 4 类标记（`docs/arch/` / `<module>/arch.md` / 文件头 `code-master:title` / 行间 `// CMA:`）覆盖从项目级到代码行级——没有标记，约束就只在脑子里，没法扩散。

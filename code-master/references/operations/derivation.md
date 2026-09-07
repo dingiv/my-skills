@@ -8,7 +8,7 @@
 
 ## 在核心方法论中的位置
 
-> 本章是 **「约束驱动扩散」**（详见 SKILL.md 核心方法论 + [composition.md](composition.md) 扩散模型类比）的**业务层展开**。
+> 本章是 **「约束驱动扩散」**（详见 SKILL.md 核心方法论 + [composition.md](../theory/composition.md) 扩散模型类比）的**业务层展开**。
 
 **5 步推导 = 业务约束的扩散路径**——每一步都是一条新约束，从"需求"扩散到"代码"：
 
@@ -83,7 +83,7 @@ daemon 形态（main + loop + cleanup）
 
 - **输入**：handler 集合
 - **输出**：完整的 daemon 程序（[anatomy.md](../theory/anatomy.md) 八件套）
-- **关键**：把 handler 集合回填到 `while(true)` 循环里，加上启动三件套和 cleanup
+- **关键**：把 handler 集合回填到 `while(true)` 循环里，加上启动阶段（args / config / 事件源 / state）和 cleanup
 
 ## 第 3 步展开：端到端链路 → 事件源 + 事件类型
 
@@ -132,7 +132,7 @@ handler onClick(event, state):
     return state'
 ```
 
-详见 [theory/function-purity.md](../../theory/function-purity.md)。
+详见 [theory/function-purity.md](../theory/function-purity.md)。
 
 **handler 命名约定**：以事件类型命名，让「事件类型 ↔ handler」一一对应：
 
@@ -180,7 +180,7 @@ main(argc, argv)
 | [立项流程](phases/initiation.md) | 第 1 步 + 第 2 步的详细对话流程（接口→链路） |
 | [程序的形态](../theory/anatomy.md) | 第 5 步：把 handler 集合填进 daemon 八件套 |
 | **本章**（derivation） | **第 3 步 + 第 4 步的桥梁：链路 → 事件 → handler** |
-| [工作流：四步](workflow.md) 第 2.2 步 | 对外接口 → 链路的整体方法论 |
+| [工作流：架构设计四子步](workflow.md) 第 2.2 步 | 对外接口 → 链路的整体方法论 |
 
 读 code-master 的顺序：**initiation → 本章 → anatomy**。三篇组合起来就是「需求 → 代码」的完整推导路径。
 

@@ -17,11 +17,11 @@
 
 | 原则 | 一句话 | 对应章节 |
 | --- | --- | --- |
-| **S** - 单一职责 | 一个模块只做一类事 | [workflow.md 第 2.4 步](../operations/workflow.md) + [rust-style R2](../../../../rust-style/SKILL.md) |
+| **S** - 单一职责 | 一个模块只做一类事 | [workflow.md 第 2.4 步](../operations/workflow.md) + [rust-style 模块层 R2](../../../rust-style/SKILL.md) |
 | **O** - 开闭 | 扩展开放，修改关闭 | **本章重点** |
-| **L** - 里氏替换 | 子类型可替换父类型 | [rust-style R1-R2](../../../../rust-style/SKILL.md) |
-| **I** - 接口隔离 | 多个小接口 > 一个大接口 | [rust-style R2](../../../../rust-style/SKILL.md) |
-| **D** - 依赖倒置 | 依赖抽象，不依赖具体 | **本章 + [rust-style R7](../../../../rust-style/SKILL.md) / [ts-style 规则 9](../../../../ts-style/SKILL.md)** |
+| **L** - 里氏替换 | 子类型可替换父类型 | [rust-style 模块层 R1-R2](../../../rust-style/SKILL.md) |
+| **I** - 接口隔离 | 多个小接口 > 一个大接口 | [rust-style 模块层 R2](../../../rust-style/SKILL.md) |
+| **D** - 依赖倒置 | 依赖抽象，不依赖具体 | **本章 + [rust-style 模块层 R7](../../../rust-style/SKILL.md) / [ts-style 规则 9](../../../ts-style/SKILL.md)** |
 
 ## OCP 深入
 
@@ -166,8 +166,8 @@ await process(mock, testData);
 - 零运行时开销（Rust 的静态分派）
 
 **参考**：
-- Rust: [rust-style 进程层 R7](../../../../rust-style/SKILL.md) 函数显式声明依赖
-- TypeScript: [ts-style 规则 9](../../../../ts-style/SKILL.md) 顶级函数优先显式声明依赖
+- Rust: [rust-style 模块层 R7](../../../rust-style/SKILL.md) 函数显式声明依赖
+- TypeScript: [ts-style 规则 9](../../../ts-style/SKILL.md) 顶级函数优先显式声明依赖
 
 ### 有 IOC 时的做法：依赖注入
 
@@ -264,18 +264,18 @@ class UserController {
 | [composition.md](composition.md) | 域的组合 = 多个子域按接口协作；OCP 让子域可替换 |
 | [container.md](container.md) | 容器 = 治理边界；OCP 让容器内行为可扩展 |
 | [phases/early-dev.md](../operations/phases/early-dev.md) | 工程化在 init 阶段就要确立 OCP |
-| [rust-style 进程层 R1-R7](../../../../rust-style/SKILL.md) | Rust 实现 OCP 的具体规则 |
-| [ts-style 规则 7-9](../../../../ts-style/SKILL.md) | TypeScript 实现 OCP 的具体规则 |
+| [rust-style 模块层 R1-R7](../../../rust-style/SKILL.md) | Rust 实现 OCP 的具体规则 |
+| [ts-style 规则 1-4](../../../ts-style/SKILL.md) | TypeScript 实现 OCP 的具体规则 |
 
 ## SOLID 在 code-master / language style 中的落地
 
 | 原则 | code-master 章节 | 语言 style 落地 |
 | --- | --- | --- |
-| S 单一职责 | [workflow.md 2.4 步](../operations/workflow.md) | rust-style R2 / ts-style 规则 1-2 |
-| O 开闭 | **本章** | rust-style R1-R2 / ts-style 规则 7-9 |
-| L 里氏替换 | [composition.md](composition.md) | rust-style R1-R2（trait bound 即 L）|
-| I 接口隔离 | [interface-contract.md](../operations/interface-contract.md) | rust-style R2（拆 trait）|
-| D 依赖倒置 | **本章** | rust-style R7 / ts-style 规则 9 |
+| S 单一职责 | [workflow.md 2.4 步](../operations/workflow.md) | rust-style 模块层 R2 / ts-style 规则 1-2 |
+| O 开闭 | **本章** | rust-style 模块层 R1-R2 / ts-style 规则 1-4 |
+| L 里氏替换 | [composition.md](composition.md) | rust-style 模块层 R1-R2（trait bound 即 L）|
+| I 接口隔离 | [interface-contract.md](../operations/interface-contract.md) | rust-style 模块层 R2（拆 trait）|
+| D 依赖倒置 | **本章** | rust-style 模块层 R7 / ts-style 规则 9 |
 
 ## 反模式
 

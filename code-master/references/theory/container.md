@@ -88,7 +88,7 @@
 | [作用域](scope.md) | 空间如何切分 |
 | **本章**（container） | **切分后如何治理** |
 | [与其他 skill 的关系](relations.md) | 代码层（rust-style / ts-style）的「模块 = 容器」 |
-| [工作流：四步](../operations/workflow.md) 第 2.4 步 | 空间优化 = 把状态装进合适容器 |
+| [工作流：架构设计四子步](../operations/workflow.md) 第 2.4 步 | 空间优化 = 把状态装进合适容器 |
 
 ## 自检
 

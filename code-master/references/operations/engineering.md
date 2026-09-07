@@ -499,16 +499,16 @@ x += 1;  // 跳过索引 0，因为 0 是哨兵值
 | --- | --- |
 | [phases/early-dev.md](phases/early-dev.md) | 4 项基础设施（logger / config / constants / 目录结构）是工程化在 init 阶段的子集 |
 | [phases/debug.md](phases/debug.md) | 调试工具（lldb / DevTools）是工具层面的延伸 |
-| [rust-style 进程层](../../../../rust-style/SKILL.md) | Rust 工程化具体实现 |
-| [ts-style 规则 7-8](../../../../ts-style/SKILL.md) | TypeScript 工程化具体实现 |
+| [rust-style 进程层](../../../rust-style/SKILL.md) | Rust 工程化具体实现 |
+| [ts-style 规则 7-8](../../../ts-style/SKILL.md) | TypeScript 工程化具体实现 |
 | [workflow.md 第 2.4 步](workflow.md) | 空间复杂度优化（工程化把工具集中到 utils / scripts） |
 
 ## 跟语言 style 的关系
 
 工程化规定**"要建什么 / 为什么"**；具体怎么建交给语言 style：
 
-- **Rust 实现** → [rust-style 进程层 R1-R4](../../../../rust-style/SKILL.md)（基础设施集中 / 生命周期移交 / 并发约束 / IO deadline）
-- **TypeScript 实现** → [ts-style 规则 7-8](../../../../ts-style/SKILL.md)（避免模块顶层可变状态 / 受控全局状态）
+- **Rust 实现** → [rust-style 进程层 R1-R4](../../../rust-style/SKILL.md)（基础设施集中 / 生命周期移交 / 并发约束 / IO deadline）
+- **TypeScript 实现** → [ts-style 规则 7-8](../../../ts-style/SKILL.md)（避免模块顶层可变状态 / 受控全局状态）
 
 ## 反模式
 

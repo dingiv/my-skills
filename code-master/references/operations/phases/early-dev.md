@@ -282,7 +282,7 @@ business code
 
 ## 跟语言 style 的关系
 
-- **Rust 实现**：[rust-style 进程层 R1](../../../../rust-style/SKILL.md) 基础设施集中 + R3 生命周期移交
+- **Rust 实现**：[rust-style 进程层 R1](../../../../rust-style/SKILL.md) 基础设施集中 + R2 生命周期移交
 - **TypeScript 实现**：[ts-style 规则 7](../../../../ts-style/SKILL.md) 避免模块顶层可变状态 + 规则 8 受控的全局状态
 
 utils 模块的具体实现交给语言 style 决定；本章节只规定"要建什么"和"为什么建"。

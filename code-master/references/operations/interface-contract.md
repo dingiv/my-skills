@@ -247,7 +247,7 @@ interface GuiComponent {
 ```
 
 **接口先于链路**：先定接口契约，再为每个接口设计实现链路。
-**链路不暴露于接口**：链路的内部细节（state、handler、event source）由调用方通过接口看到。
+**链路不暴露于接口**：链路的内部细节（state、handler、event source）对调用方不可见——调用方只看到四要素契约。
 
 ## 跟 derivation 的衔接
 

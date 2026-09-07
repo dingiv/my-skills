@@ -4,7 +4,7 @@
 
 ## 一句话
 
-> **daemon 程序 = main + 启动三件套 + 事件循环 + handler 分发 + 清理。**
+> **daemon 程序 = main + 启动阶段（args / config / 事件源 / state）+ 事件循环 + handler 分发 + 清理（共八件）。**
 
 每一个 daemon——服务端、桌面客户端、嵌入式服务、CLI 工具只要在持续运行——都是这个形态。
 
@@ -12,7 +12,7 @@
 
 ```c
 int main(int argc, char *argv[]) {
-  // ── 启动三件套 ─────────────────────────────────
+  // ── 启动阶段（args / config）──
   Args   *args   = parseArgs(argc, argv);   // 1. 命令行参数
   Config *config = readConfig();            // 2. 配置文件
 
@@ -50,10 +50,9 @@ int main(int argc, char *argv[]) {
 | 3 | `readConfig` | 配置文件 | 初始状态的一部分 |
 | 4 | event sources | IO / 计时器 / 信号 / 消息队列 | 输入字母表 |
 | 5 | mutable state | 状态变量（loop 之外） | 状态变量 S |
-| 6 | event loop | `while(true)` | 转移函数迭代器 |
-| 7 | block & wake | 阻塞等待 / 被唤醒 | 读输入 |
-| 8 | handler + mutation | handler 调用 + 修改 state | 转移函数 δ(s, e) → s' |
-| 9 | cleanup | 逆序销毁 | 回到终态 |
+| 6 | event loop（含 block & wake）| `while(true)`：阻塞等待事件 / 被事件唤醒 | 转移函数迭代器 + 读输入 |
+| 7 | handler + mutation | handler 调用 + 修改 state | 转移函数 δ(s, e) → s' |
+| 8 | cleanup | 逆序销毁 | 回到终态 |
 
 **关键约束**：
 
@@ -82,7 +81,7 @@ int main(int argc, char *argv[]) {
 
 ```
 main
- └─ 启动三件套
+ └─ 启动阶段（args / config）
      └─ 准备事件源 + state
          └─ event loop
              ├─ 阻塞 → 唤醒
@@ -148,7 +147,7 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 | --- | --- |
 | [核心论断](core.md) | 状态机的抽象模型 |
 | **本章**（anatomy） | 状态机的代码形态 |
-| [工作流：四步](../operations/workflow.md) | 怎么搭一台状态机 |
+| [工作流：架构设计四子步](../operations/workflow.md) | 怎么搭一台状态机 |
 | [三种应用模式](../operations/modes.md) | 三种典型搭建场景 |
 | [Bootstrap 流程](../operations/phases/initiation.md) | 0 → 1 的对话引导 |
 
@@ -156,7 +155,7 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 
 ## 自检：你的程序是这个形态吗？
 
-- [ ] 有 main 函数和明确的启动三件套？
+- [ ] 有 main 函数和明确的启动阶段（args / config / 事件源 / state）？
 - [ ] 有清晰的事件源列表（不是"边走边看"）？
 - [ ] mutable state 在循环**之外**持有？
 - [ ] 事件循环是唯一的"时间维度"驱动？
@@ -168,4 +167,4 @@ daemon 形态不变（main + loop + handlers 一个都没少），变化的是**
 
 ## 一句话
 
-> **daemon 程序 = 状态机的标准形态 = main + 启动三件套 + 事件循环 + handler 分发 + 清理；三层结构是状态机的空间拆分；MVC / MVP / MVVM / ECS 都是同一个 daemon 形态在不同时代的不同侧重。**
+> **daemon 程序 = 状态机的标准形态 = main + 启动阶段（args / config / 事件源 / state）+ 事件循环 + handler 分发 + 清理；三层结构是状态机的空间拆分；MVC / MVP / MVVM / ECS 都是同一个 daemon 形态在不同时代的不同侧重。**

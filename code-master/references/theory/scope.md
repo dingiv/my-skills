@@ -4,7 +4,7 @@
 
 ## 一句话
 
-> **作用域就是空间。** 程序、文件、类、函数都是作用域，每个域有自己的生命周期（**init / set / get / drop** 4 个节点）和状态。**域中状态的所有者就是域本身**——状态管理不依赖外部机制，生命周期跟着域走。
+> **作用域就是空间。** 程序、文件、类、函数都是作用域，每个域有自己的生命周期（**init / get / set / drop** 4 个节点）和状态。**域中状态的所有者就是域本身**——状态管理不依赖外部机制，生命周期跟着域走。
 
 ## 为什么需要作用域
 
@@ -61,7 +61,7 @@
 
 - 可以放：日志、配置、单例进程级资源
 - **不能**放：需要反复创建 / 销毁的可变状态——这些必须放进局部作用域
-- 必须放时，参考 [ts-style 规则 8「受控的全局状态」](https://example.com/ts-style) 的 4 钩子（init / get / set / destroy）+ 唯一 Owner 模式
+- 必须放时，参考 [ts-style 规则 8「受控的全局状态」](../../../ts-style/SKILL.md) 的 4 钩子（init / get / set / destroy）+ 唯一 Owner 模式
 
 ## 域的可展开性：单例域 vs 多例域
 
@@ -116,7 +116,7 @@ FP 的不可变更新模式
 | **常量** | 不可变，没有销毁重建问题 |
 | **纯函数** | 无副作用，可任意调用 |
 | **单例基础设施** | logger / config loader / DB pool——本来就只该有一份 |
-| **4 钩子受控的全局状态** | init / get / set / destroy + 唯一 Owner（见 [ts-style 规则 8](https://example.com/ts-style)）|
+| **4 钩子受控的全局状态** | init / get / set / destroy + 唯一 Owner（见 [ts-style 规则 8](../../../ts-style/SKILL.md)）|
 
 | 不可放 | 原因 |
 | --- | --- |
@@ -136,7 +136,7 @@ FP 的不可变更新模式
 | --- | --- |
 | [function-purity.md](function-purity.md) | 「隐参函数」罪状之一 = 依赖全局单例变量 |
 | [encapsulation.md](encapsulation.md) | 封装 = 把多例域的状态收进实例，避开单例域 |
-| [ts-style 规则 7-8](https://example.com/ts-style) | 「避免模块顶层可变状态」「4 钩子受控全局」是单例域的纪律 |
+| [ts-style 规则 7-8](../../../ts-style/SKILL.md) | 「避免模块顶层可变状态」「4 钩子受控全局」是单例域的纪律 |
 | [phases/early-dev.md](../operations/phases/early-dev.md) | logger / config 等是「单例域可放」的典型例子 |
 
 ## 一句话
@@ -177,6 +177,8 @@ FP 的不可变更新模式
 - **常量**只有 3 个节点：init / get / drop（没有 set，因为不可变）
 - **变量**4 个节点齐全：init / get / set / drop
 - **IO 资源**4 个节点齐全：open / read / write / close
+
+> **节点命名**：Rust 称 `drop`，JS/TS 称 `destroy`——同一个节点（见下文 4 钩子一节）。
 
 **示例**：
 
@@ -243,7 +245,7 @@ f.close();                  // drop
 | [程序的形态](anatomy.md) | 状态机的代码形态（八件套） |
 | **本章**（scope） | **状态机的空间切分机制** |
 | [复杂度封装效应](encapsulation.md) | 封装 = 用作用域隔离复杂度 |
-| [工作流：四步](../operations/workflow.md) 第 2.4 步 | 空间复杂度优化 = 按作用域拆分 |
+| [工作流：架构设计四子步](../operations/workflow.md) 第 2.4 步 | 空间复杂度优化 = 按作用域拆分 |
 
 读 code-master 的顺序：**核心论断 → anatomy → 本章 → 工作流 2.4**。
 
@@ -260,4 +262,4 @@ f.close();                  // drop
 
 ## 一句话
 
-> **作用域就是空间。** 程序、文件、类、函数都是域，每个域有 4 个生命周期节点（init / set / get / drop）。**域中状态的所有者就是域本身**——状态管理不依赖外部机制，生命周期跟着域走。
+> **作用域就是空间。** 程序、文件、类、函数都是域，每个域有 4 个生命周期节点（init / get / set / drop）。**域中状态的所有者就是域本身**——状态管理不依赖外部机制，生命周期跟着域走。
