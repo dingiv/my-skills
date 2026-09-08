@@ -249,6 +249,7 @@ project-root/
 - 业务代码直接 `import logger` 而不是注入 → 测试困难
 - 没有 utils 模块散落各处 → 不一致、难维护
 - 运行时数据写在 src/ 旁边 → 应该是 data/（gitignore）
+- 文件散落在各处（/tmp、CWD、系统目录）→ 统一存储根目录（见 [file-management.md](../file-management.md)）
 - 单文件超过 1000 行 → 按职责拆文件
 
 **utils 模块依赖图**：
@@ -273,6 +274,7 @@ business code
 
 | 本章 | 对应 |
 | --- | --- |
+| [file-management.md](../file-management.md) | **文件管理的运行期纪律（统一根目录 / 分类型目录 / 读写模块 / 持久化归属）——本章的目录结构是它的「建设期」** |
 | [initiation.md](initiation.md) 第 3 步 | 接口契约（决定 utils 模块需要支持什么） |
 | [interface-contract.md](../interface-contract.md) | 接口契约决定了 logger 输出什么 / config 读什么 |
 | [workflow.md 第 2.4 步](../workflow.md) | 空间复杂度优化（utils 是典型的跨切面空间）|
