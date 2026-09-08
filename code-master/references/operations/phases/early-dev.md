@@ -1,6 +1,6 @@
 # 早期开发 / 项目骨架（Early Dev / Project Skeleton）
 
-> **正式写业务代码之前，先把基础设施搭好**——logger、config、constants、目录结构、utils 模块。这些是项目的「骨骼」，**先于业务逻辑就绪**（参见 [timing.md](../../theory/timing.md) 第 1 条「依赖前向包含」）。
+> **正式写业务代码之前，先把基础设施搭好——env 模块最先就绪，logger / config / constants / 目录结构、utils 模块跟在后面。这些是项目的「骨骼」，**先于业务逻辑就绪**（参见 [timing.md](../../theory/timing.md) 第 1 条「依赖前向包含」）。
 
 **进入条件**：[initiation.md](initiation.md) 第 4 步（调用链罗列）已完成，接口契约与调用链都已确定。
 
@@ -8,7 +8,7 @@
 
 ## 一句话
 
-> **4 个最佳实践先于业务代码：统一 logger、统一配置、常量模块、目录结构 + utils。**
+> **env 模块最先 init（读环境变量 → 形成类型化 Config）→ 4 个最佳实践跟在后面：统一 logger、统一配置、常量模块、目录结构 + utils。**
 
 ## 与工程化的关系
 
@@ -274,6 +274,7 @@ business code
 
 | 本章 | 对应 |
 | --- | --- |
+| [env-management.md](../env-management.md) | **env 模块** 启动时第一个就绪，是本章 4 项基础设施的前置；logger 的 LOG_LEVEL、config 的 CONFIG_PATH、文件管理的 STORAGE_ROOT 都来自 Config |
 | [file-management.md](../file-management.md) | **文件管理的运行期纪律（统一根目录 / 分类型目录 / 读写模块 / 持久化归属）——本章的目录结构是它的「建设期」** |
 | [initiation.md](initiation.md) 第 3 步 | 接口契约（决定 utils 模块需要支持什么） |
 | [interface-contract.md](../interface-contract.md) | 接口契约决定了 logger 输出什么 / config 读什么 |

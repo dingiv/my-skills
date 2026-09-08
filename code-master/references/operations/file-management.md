@@ -256,6 +256,7 @@ impl FileStore {
 
 | 章节 | 关系 |
 | --- | --- |
+| [env-management.md](env-management.md) | 存储根目录通常来自 `env.STORAGE_ROOT`；env 模块**比**文件存储更早就绪——先有 Config，后有存储根目录 |
 | [phases/early-dev.md](phases/early-dev.md) | early-dev 的 4 项基础设施（logger / config / constants / 目录结构）是本章的「建设期」；本章是「运行期纪律」 |
 | [function-purity.md](../theory/function-purity.md) | 文件读写模块 = IO 四条铁律在文件系统上的落地（Connection 封装 / failable / 内部状态 / 单一 owner） |
 | [scope.md](../theory/scope.md) | 持久化状态模块 = 多例域 4 节点（init / get / set / drop）的实例；owner = 模块本身 |
