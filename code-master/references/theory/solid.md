@@ -83,9 +83,9 @@ impl Storage for DbStorage {
 // 加 GcsStorage = 新 struct + 新 impl，process 不动
 ```
 
-## OCP 在项目初期的应用
 
 ### 决策树
+OCP 在项目初期的应用
 
 ```
 项目启动

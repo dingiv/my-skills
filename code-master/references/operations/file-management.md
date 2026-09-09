@@ -205,6 +205,39 @@ impl FileStore {
 
 **与 [scope.md 4 节点](../theory/scope.md) 的关系**：持久化状态模块的生命周期就是多例域的 4 节点（init / get / set / drop）——状态住在模块中，owner 就是模块本身。
 
+> **进一步的工程化角度**——数据怎么建模 / 选什么格式 / 用什么持久化模式 / 怎么加载 / 何时保存 / 内存磁盘怎么同步 / 崩了怎么恢复——见 [persistence.md](persistence.md)。本章只讲「归属」，persistence.md 讲「归属之外的完整生命周期」。
+
+## 6. 减少乃至禁止在对象的方法中使用 IO 函数
+在面向对象的编程语言中, 对象方法的操作对象应当专注于对象的成员属性本身, 操作 IO 函数或者使用全局变量突破的对象的作用域边界, 需要减少使用; 在没有 class 或者对象的编程语言中, 存在类似的规范, 例如 Rust/Go 中的关联方法, 依然需要遵循这个约定;
+
+替代方法: 使用类的静态方法或者顶层全局 IO 函数;
+
+**I/O函数始终是独立于对象之外的**, 因为对象是一组数据, 及其绑定的操作函数, 如果尝试去触碰自身之外的数据, 那么就造成了依赖边界扩大;
+
+```ts
+class SomeData {
+
+  data
+
+  // 不推荐 ❌
+  loadData(path) {
+    let d = readFile(path)
+    this.data = d
+  }
+
+  // 推荐 ✅
+  static loadData(ins, path) {
+    ins.d = readFile(path)
+  }
+}
+
+// 推荐 ✅
+function loadData(ins, path) {
+    ins.d = readFile(path)
+}
+
+```
+
 ## 反模式
 
 | 反模式 | 表现 | 纠正 |
